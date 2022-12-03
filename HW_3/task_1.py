@@ -11,3 +11,13 @@
 [5, 1, 5, 2, 7, 11]
 14
 """
+
+import random
+
+n = int(input("Введите число N:"))
+my_list = [random.randrange(n) for i in range(n)]
+print(my_list)
+s = 0
+for i in range(1, n, 2):
+    s += my_list[i]
+print(s)
