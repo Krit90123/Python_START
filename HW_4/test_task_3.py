@@ -1,34 +1,49 @@
-import unittest
-
-from task_3 import < 'ваша функция по созданию полиномов' > as target
-
-
-# Класс с тестами
-class TestClass(unittest.TestCase):
-
-    def test_create_poly(self):
-        """
-        Метод тестирования функции создания полиномов.
-        Функция должна принимать список коэффициентов полинома
-        """
-
-        args = [
-            [0, 1, 2],
-            [2, 0, 1],
-            [1, 2, 0],
-            [0, 0, 0],
-        ]
-
-        expects = [
-            'x + 2 = 0',
-            '2x^2 + 1 = 0',
-            'x^2 + 2x = 0',
-            '0 = 0',
-        ]  # если ваша функция создает полиномы без пробелов, то удалите пребелы в results
-
-        for arg, expect in zip(args, expects):
-            self.assertEqual(target(arg), expect)
+def write_file(st):
+    with open('file33.txt', 'w') as data:
+        data.write(st)
 
 
-if __name__ == '__main__':
-    unittest.main()
+def rnd():
+    return random.randint(0, 101)
+
+
+def create_mn(k):
+    lst = [rnd() for i in range(k + 1)]
+    return lst
+
+
+def create_str(sp):
+    lst = sp[::-1]
+    wr = ''
+    if len(lst) < 1:
+        wr = 'x = 0'
+    else:
+        for i in range(len(lst)):
+            if i != len(lst) - 1 and lst[i] != 0 and i != len(lst) - 2:
+                wr += f'{lst[i]}x^{len(lst) - i - 1}'
+                if lst[i + 1] != 0:
+                    wr += ' + '
+            elif i == len(lst) - 2 and lst[i] != 0:
+                wr += f'{lst[i]}x'
+                if lst[i + 1] != 0:
+                    wr += ' + '
+            elif i == len(lst) - 1 and lst[i] != 0:
+                wr += f'{lst[i]} = 0'
+            elif i == len(lst) - 1 and lst[i] == 0:
+                wr += ' = 0'
+    return wr
+
+
+k = int(input("Введите натуральную степень k = "))
+koef = create_mn(k)
+write_file(create_str(koef))
+
+
+k = randint(2, 5)
+
+ratios = get_ratios(k)
+polynom2 = get_polynomial(k, ratios)
+print(polynom2)
+
+with open('Polynom_2.txt', 'w') as data:
+    data.write(polynom2)

@@ -8,3 +8,15 @@
 [1, 1, 2, 3, 3, 4, 5, 5, 6, 7, 7, 8, 9, 9]
 [2, 4, 6, 8]
 """
+
+from random import randint
+
+n = int(input("Введите натуральное число N "))
+my_list = [randint(0, n) for i in range(n)]
+print(my_list)
+
+result = []
+for number in my_list:
+    if not my_list.count(number) > 1:
+        result.append(number)
+print(result)
