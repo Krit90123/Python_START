@@ -1,22 +1,41 @@
 """
-Задайте список из N элементов, заполненный целыми числами из промежутка [-N, N].
-Найдите произведение элементов на индексах, хранящихся в файле indexes.txt (в одной строке один индекс).
-Решение должно работать при любом натуральном N.
+Реализуйте RLE алгоритм шифрования строки: замените повторяющиеся символы строки на один символ и число его повторов.
+На первом месте идет количество повторов, на втором сам символ.
+Восстановите строку после шифрования.
 
-Ввод: значение типа <int>
-Вывод: значение типа <int>
+Ввод: значения типа <str>, можно получить из файла.
+Вывод: значение типа <str>, можно записать в файл.
+
+Примеры:
+ыыыыыррррр   аааааагггггггг
+5ы5р3 6а8г
 """
 
-from random import randint
+data = input("Введите строки символов: ")
 
-number = int(input("Введте натуральное число: "))
-my_list = [randint(-number, number) for _ in range(number)]
-print(my_list)
 
-res = 1
-with open('indexes.txt', 'r') as file:
-    for line in file:
-        index = int(line)
-        if len(my_list) > index >= -len(my_list):
-            res *= my_list[index]
-print(res)
+def rle_coding(data):
+    code = ""
+    symbol = ""
+    for s in data:
+        if symbol:
+            if s in symbol and len(symbol) < 9:
+                symbol += s
+            else:
+                code += str(len(symbol)) + symbol[0]
+                symbol = s
+        else:
+            symbol = s
+    code += str(len(symbol)) + symbol[0]
+    return code
+
+
+def decoding(data):
+    code = ""
+    for i in range(0, len(data), 2):
+        code += int(data[i]) * data[i + 1]
+    return code
+
+
+print(rle_coding(data))
+print(decoding(rle_coding(data)))
