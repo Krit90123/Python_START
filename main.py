@@ -4,7 +4,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Hello {update.effective_user.first_name}\n'
-                                    f'/conv-перевод в двочную\n'
+                                    f'/bin-перевод в двочную\n'
                                     f'/cod-шифрует слова\n'
                                     f'/ans-расшифровывает слова\n'
                                     f'/nfib-негоФибаначи')
